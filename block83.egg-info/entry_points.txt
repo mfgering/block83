@@ -1,0 +1,5 @@
+[console_scripts]
+movie = block83:make_movie
+run = block83:run
+snap = block83:snap_curr
+

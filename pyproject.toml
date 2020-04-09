@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "block83"
+version = "0.1.0"
+description = "Get images, make movies of the Block 83 construction project."
+authors = ["Mike Gering <mike@mfg-consulting-llc.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+opencv-contrib-python = "^4.2.0"
+requests = "^2.23.0"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.4.4"
+
+[tool.poetry.scripts]
+run = "block83:run"
+snap = "block83:snap_curr"
+movie = "block83:make_movie"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+

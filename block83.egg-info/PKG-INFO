@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: block83
+Version: 0.1.0
+Summary: Get images, make movies of the Block 83 construction project.
+Home-page: UNKNOWN
+Author: Mike Gering
+Author-email: mike@mfg-consulting-llc.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.7,<4.0

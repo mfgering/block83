@@ -1,0 +1,8 @@
+block83.py
+setup.py
+block83.egg-info/PKG-INFO
+block83.egg-info/SOURCES.txt
+block83.egg-info/dependency_links.txt
+block83.egg-info/entry_points.txt
+block83.egg-info/requires.txt
+block83.egg-info/top_level.txt
