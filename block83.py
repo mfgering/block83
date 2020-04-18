@@ -6,8 +6,9 @@ import cv2
 def snap_curr(images_dir="images"):
 	curr_image_url = "https://oxblue.com/archive/7f903adce7e782da7ab5d68efbe30861/current.jpg"
 	now = datetime.datetime.now()
-
-	out_fn = os.path.join(images_dir, f"block83-{now.year}-{now.month}-{now.day}-{now.hour}.jpg")
+	fmt = 'block83-%Y-%m-%d-%H.jpg'
+	fname = now.strftime(fmt)
+	out_fn = os.path.join(images_dir, fname)
 	curr_data = requests.get(curr_image_url).content
 	with open(out_fn, "wb") as handler:
 		handler.write(curr_data)
@@ -44,3 +45,6 @@ def foo():
 	with open("c:/foo/block83-test.txt", "w+") as f:
 		now = datetime.datetime.now()
 		f.write(f"Running foo at {now}")
+
+print("****FOR TESTING ONLY****")
+snap_curr()
