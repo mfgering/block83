@@ -15,7 +15,7 @@ def snap_curr(images_dir="images"):
 
 def make_movie(images_dir="images", mov_name="block83.avi"):
 	#pylint: disable=no-member
-	images = [img for img in os.listdir(images_dir) if img.endswith(".jpg")]
+	images = sorted([img for img in os.listdir(images_dir) if img.endswith(".jpg")])
 	frame = cv2.imread(os.path.join(images_dir, images[0])) 
 	height, width, _ = frame.shape
 	video = cv2.VideoWriter(mov_name, 0, 1, (width,height))
@@ -41,10 +41,20 @@ def run():
 	print("Done")
 
 def foo():
-	print("Foo!")
-	with open("c:/foo/block83-test.txt", "w+") as f:
-		now = datetime.datetime.now()
-		f.write(f"Running foo at {now}")
+	log_f = open("c:/foo/block83-log.txt", "w+")
+	log_f.write("================== start\n")
+	base_dir = '\\\\alpha.dawson\\heap\\block83'
+	if len(sys.argv) > 1:
+		base_dir = sys.argv[1]
+	if not os.path.isdir(base_dir):
+		print(f"'{base_dir}' is not a directory.")
+		sys.exit(1)
+	images_dir = os.path.join(base_dir, "images")
+	mov_fn = os.path.join(base_dir, "block83.avi")
+	#snap_curr(images_dir)
+	make_movie(images_dir, mov_fn)
+	log_f.write("================== finished\n")
+	print("Done")
 
 print("****FOR TESTING ONLY****")
-snap_curr()
+foo()
