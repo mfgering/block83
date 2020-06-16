@@ -21,7 +21,7 @@ def make_movie(images_dir="images", mov_name="block83.avi", marked_dir="images-m
 	height, width, _ = frame.shape
 	video = cv2.VideoWriter(mov_name, 0, 1, (width,height))
 	for image in images:
-		img = get_marked_image(image, images_dir, marked_dir)
+		img = get_marked_image(images_dir, marked_dir, image)
 		video.write(img)
 	cv2.destroyAllWindows()
 	video.release()
@@ -32,7 +32,9 @@ def get_marked_image(images_dir, marked_dir, image_name):
 	marked_fn = os.path.join(marked_dir, image_name)
 	try:
 		img = cv2.imread(marked_fn)
-	except Exception as exc:
+		if img is None:
+			img = make_marked(image_name, image_fn, marked_fn)
+	except Exception:
 		img = make_marked(image_name, image_fn, marked_fn)
 	return img
 
@@ -86,35 +88,29 @@ def run():
 		print(f"'{base_dir}' is not a directory.")
 		sys.exit(1)
 	images_dir = os.path.join(base_dir, "images")
+	marked_dir = os.path.join(base_dir, "images-marked")
 	mov_fn = os.path.join(base_dir, "block83.avi")
 	snap_curr(images_dir)
-	make_movie(images_dir, mov_fn)
+	make_movie(images_dir, mov_fn, marked_dir)
 	log_f.write("================== finished\n")
 	print("Done")
 
 def foo():
-	#dt = get_datetime("block83-2020-04-07-12.jpg")
-	#exit
 	log_f = open("c:/foo/block83-log.txt", "w+")
 	log_f.write("================== start\n")
-	#base_dir = '\\\\alpha.dawson\\heap\\block83'
-	base_dir = 'images'
+	base_dir = '\\\\alpha.dawson\\heap\\block83'
 	if len(sys.argv) > 1:
 		base_dir = sys.argv[1]
 	if not os.path.isdir(base_dir):
 		print(f"'{base_dir}' is not a directory.")
 		sys.exit(1)
 	images_dir = os.path.join(base_dir, "images")
+	marked_dir = os.path.join(base_dir, "images-marked")
 	mov_fn = os.path.join(base_dir, "block83.avi")
 	#snap_curr(images_dir)
-	make_movie(images_dir, mov_fn)
+	make_movie(images_dir, mov_fn, marked_dir)
 	log_f.write("================== finished\n")
 	print("Done")
 
-def bar():
-	image_name = 'block83-2020-04-07-10.jpg'
-	image_fn = './images/'+image_name
-	marked_fn = './images-marked/'+image_name
-	img = make_marked(image_name, image_fn, marked_fn)
 print("****FOR TESTING ONLY****")
-bar()
+foo()
