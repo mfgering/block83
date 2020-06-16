@@ -45,15 +45,19 @@ def make_marked(image_name, image_fn, marked_fn):
 		img_datetime = get_datetime(image_name)
 		txt = img_datetime.strftime("%m/%d/%y %H:00")
 		font                   = cv2.FONT_HERSHEY_SIMPLEX
-		bottomLeftCornerOfText = (10,500)
-		fontScale              = 1
+		h, w, ch = img.shape
+
+		bottomLeftCornerOfText = ((int)(0.65*w), (int)(0.1*h))
+		fontScale              = 3
 		fontColor              = (255,255,255)
-		lineType               = 2
+		lineType               = cv2.LINE_AA
+		thickness = 4
 		cv2.putText(img,txt, 
 			bottomLeftCornerOfText, 
 			font, 
 			fontScale,
 			fontColor,
+			thickness,
 			lineType)
 		cv2.imwrite(marked_fn, img)
 	finally:
@@ -89,11 +93,12 @@ def run():
 	print("Done")
 
 def foo():
-	dt = get_datetime("block83-2020-04-07-12.jpg")
-	exit
+	#dt = get_datetime("block83-2020-04-07-12.jpg")
+	#exit
 	log_f = open("c:/foo/block83-log.txt", "w+")
 	log_f.write("================== start\n")
-	base_dir = '\\\\alpha.dawson\\heap\\block83'
+	#base_dir = '\\\\alpha.dawson\\heap\\block83'
+	base_dir = 'images'
 	if len(sys.argv) > 1:
 		base_dir = sys.argv[1]
 	if not os.path.isdir(base_dir):
@@ -106,5 +111,10 @@ def foo():
 	log_f.write("================== finished\n")
 	print("Done")
 
+def bar():
+	image_name = 'block83-2020-04-07-10.jpg'
+	image_fn = './images/'+image_name
+	marked_fn = './images-marked/'+image_name
+	img = make_marked(image_name, image_fn, marked_fn)
 print("****FOR TESTING ONLY****")
-foo()
+bar()
