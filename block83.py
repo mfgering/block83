@@ -118,5 +118,5 @@ def foo():
 	log_f.write("================== finished\n")
 	print("Done")
 
-print("****FOR TESTING ONLY****")
-foo()
+#print("****FOR TESTING ONLY****")
+#foo()
