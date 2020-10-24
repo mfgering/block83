@@ -16,7 +16,9 @@ def snap_curr(images_dir="images"):
 
 def make_movie(images_dir="images", mov_name="block83.avi", marked_dir="images-marked"):
 	#pylint: disable=no-member
-	images = sorted([img for img in os.listdir(images_dir) if img.endswith(".jpg")])
+	all_images = sorted([img for img in os.listdir(images_dir) if img.endswith(".jpg")])
+	#TODO: Make more options for culling the images
+	images = [name for name in all_images if get_datetime(name).hour == 12]
 	frame = cv2.imread(os.path.join(images_dir, images[0]))
 	height, width, _ = frame.shape
 	video = cv2.VideoWriter(mov_name, 0, 1, (width,height))
@@ -107,6 +109,10 @@ def foo():
 	images_dir = os.path.join(base_dir, "images")
 	marked_dir = os.path.join(base_dir, "images-marked")
 	mov_fn = os.path.join(base_dir, "block83.avi")
+	images = sorted([img for img in os.listdir(images_dir) if img.endswith(".jpg")])
+	# Cull images here
+	culled_names = [name for name in images if get_datetime(name).hour == 12]
+	return
 	#snap_curr(images_dir)
 	make_movie(images_dir, mov_fn, marked_dir)
 	log_f.write("================== finished\n")
